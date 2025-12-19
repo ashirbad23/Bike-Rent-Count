@@ -1,0 +1,5 @@
+from utils import train
+
+if __name__ == "__main__":
+    train.train_mlp()
+    train.train_lstm()

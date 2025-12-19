@@ -1,0 +1,165 @@
+Bike Rental Demand Prediction using Deep Learning
+=================================================
+
+This project predicts hourly bike rental demand using the UCI Bike Sharing Dataset.
+Two deep learning models are implemented and compared:
+
+1. MLP (Feedforward Neural Network)
+2. LSTM (Time-Series Model)
+
+The comparison highlights the impact of temporal modeling on prediction performance.
+
+------------------------------------------------------------
+1. Prerequisites
+------------------------------------------------------------
+
+- Operating System: Windows / Linux / macOS
+- Anaconda or Miniconda installed
+- Python environment managed via Conda
+- (Optional) NVIDIA GPU with CUDA support
+
+------------------------------------------------------------
+2. Project Structure
+------------------------------------------------------------
+
+Bike_Rental_Prediction/
+│
+├── assets/
+│   ├── model_results/          # Saved plots (EDA + model results)
+│
+├── data/
+│   ├── hour.csv                # Main dataset used
+│   ├── day.csv
+│   └── Readme.txt
+│
+├── logs/
+│   ├── mlp_hist.pkl            # Training history (MLP)
+│   └── lstm_hist.pkl           # Training history (LSTM)
+│
+├── models/
+│   ├── mlp.py                  # MLP model definition
+│   └── lstm.py                 # LSTM model definition
+│
+├── tools/
+│   ├── preprocessor.pkl        # Saved sklearn preprocessing pipeline
+│   └── y_scaler.pkl            # Target scaler
+│
+├── utils/
+│   ├── dataset.py              # Dataset + preprocessing + sequence logic
+│   └── train.py                # Training and evaluation utilities
+│
+├── weights/
+│   ├── weights_mlp.pt          # Trained MLP weights
+│   └── weights_lstm.pt         # Trained LSTM weights
+│
+├── config.py                   # Hyperparameters and settings
+├── main.py                     # Training entry point
+├── test.ipynb                  # Testing / inference notebook
+├── EDA.ipynb                   # Exploratory Data Analysis
+├── environment.yml             # Conda environment
+└── run.txt                     # This file
+
+------------------------------------------------------------
+3. Create the Conda Environment
+------------------------------------------------------------
+
+Open a terminal in the project root directory and run:
+
+    conda env create -f environment.yml
+
+This will create the required Conda environment with all dependencies.
+
+------------------------------------------------------------
+4. Activate the Environment
+------------------------------------------------------------
+
+    conda activate bike
+
+(Use `conda env list` if the environment name differs.)
+
+------------------------------------------------------------
+5. Dataset Setup
+------------------------------------------------------------
+
+Download the dataset from:
+https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset
+
+Place the file:
+
+    hour.csv
+
+inside:
+
+    data/hour.csv
+
+------------------------------------------------------------
+6. Configure Hyperparameters
+------------------------------------------------------------
+
+All model and training hyperparameters are defined in:
+
+    config.py
+
+This includes:
+- Learning rate
+- Batch size
+- Number of epochs
+- LSTM window size
+- Hidden dimensions
+
+Modify `config.py` as needed before training.
+
+------------------------------------------------------------
+7. Training the Models
+------------------------------------------------------------
+
+To train both MLP and LSTM models, simply run:
+
+    python main.py
+
+This will:
+- Preprocess the dataset
+- Train the MLP model
+- Train the LSTM model
+- Save trained weights to `weights/`
+- Save training history to `logs/`
+- Save result plots to `assets/model_results/`
+
+------------------------------------------------------------
+8. Testing / Inference
+------------------------------------------------------------
+
+To test the trained models and visualize predictions, open:
+
+    test.ipynb
+
+and run all cells.
+
+This notebook:
+- Loads saved preprocessors and model weights
+- Performs inference on test data
+- Plots predicted vs actual bike demand
+
+------------------------------------------------------------
+9. Outputs
+------------------------------------------------------------
+
+The following outputs are generated:
+
+- Training and validation loss curves
+- Predicted vs actual plots for MLP and LSTM
+- Saved SVG figures in `assets/model_results/`
+- Serialized preprocessors and trained weights
+
+------------------------------------------------------------
+10. Notes
+------------------------------------------------------------
+
+- Temporal order is preserved (no shuffling in train-test split).
+- Cyclic features (sin, cos) are used for hour, weekday, and month.
+- LSTM uses a 24-hour sliding window for forecasting.
+- Both models use identical preprocessing for fair comparison.
+
+------------------------------------------------------------
+End of File
+------------------------------------------------------------

@@ -1,0 +1,29 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDEs
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Conda / virtual envs
+.env
+.venv
+env/
+venv/
+
+# Logs that can be regenerated (optional)
+# logs/*.log
+
+# DO NOT ignore the following (important artifacts):
+# *.pt
+# *.pkl
+# *.svg
